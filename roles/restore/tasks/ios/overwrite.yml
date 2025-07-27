@@ -8,18 +8,18 @@
   run_once: true
   delegate_to: backup-server
 
-# - name: Copy file over to flash on network device
-#   ansible.builtin.shell: >
-#     scp -O -o StrictHostKeyChecking=no
-#     /tmp/{{ rollback_date }}/{{ inventory_hostname }}.txt
-#     {{ ansible_user }}@{{ inventory_hostname }}:'flash:{{ rollback_date }}-{{ inventory_hostname }}.txt'
-#   delegate_to: localhost
-#   run_once: true
+- name: Copy file over to flash on network device
+  ansible.builtin.shell: >
+    scp -O -o StrictHostKeyChecking=no
+    /tmp/{{ rollback_date }}/{{ inventory_hostname }}.txt
+    {{ ansible_user }}@{{ inventory_hostname }}:'flash:{{ rollback_date }}-{{ inventory_hostname }}.txt'
+  delegate_to: localhost
+  run_once: true
 
-# - name: Copy file over to flash on network device
-#   ansible.netcommon.net_put:
-#     src: "/tmp/{{ rollback_date }}/{{ inventory_hostname }}.txt"
-#     dest: "flash:{{ rollback_date }}-{{ inventory_hostname }}.txt"
+- name: Copy file over to flash on network device
+  ansible.netcommon.net_put:
+    src: "/tmp/{{ rollback_date }}/{{ inventory_hostname }}.txt"
+    dest: "flash:{{ rollback_date }}-{{ inventory_hostname }}.txt"
 
 - name: Overwrite startup config - overwrite
   environment:
